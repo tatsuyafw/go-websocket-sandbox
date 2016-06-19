@@ -8,6 +8,7 @@
      $(function() {
        var $msg = $( '#msg' );
        var $sendButton = $( '#send' );
+       var $msgList = $( '#msg-list' );
 
        var host = location.host;
        var ws = new WebSocket("ws://" + host + "/echo");
@@ -20,6 +21,8 @@
 
        ws.onmessage = function(e) {
          console.log("Received:", e.data);
+         var $li = $( "<li>" );
+         $( "<li>" ).text(e.data).appendTo( $msgList );
        }
 
        $sendButton.click(function() {
