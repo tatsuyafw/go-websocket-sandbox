@@ -6,21 +6,22 @@
     <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script>
      $(function() {
+       var $msg = $( '#msg' );
+       var $sendButton = $( '#send' );
+
        var host = location.host;
        var ws = new WebSocket("ws://" + host + "/echo");
        ws.onopen = function() {
-         console.log("ws onopen")
+         console.log("ws onopen");
        }
        ws.onerror = function() {
-         console.log("ws onerror")
+         console.log("ws onerror");
        }
 
        ws.onmessage = function(e) {
-         console.log("Received:", e.data)
+         console.log("Received:", e.data);
        }
 
-       var $msg = $( '#msg' );
-       var $sendButton = $( '#send' );
        $sendButton.click(function() {
          var val = $msg.val();
          ws.send(val);
@@ -33,5 +34,7 @@
     <h2>WebSocket sample</h2>
     <input id="msg" type="text" />
     <input type="button" id="send" value="send"></input>
+    <ul id="msg-list">
+    </ul>
   </body>
 </html>
